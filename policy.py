@@ -16,8 +16,7 @@ def main():
 
 def policy(mazey, terminal = True):
 	#call value iteration here
-	value_iteration(mazey)
-	mdp.value
+	# value_iteration(mazey)
 	for i in range(mazey.size):
 		for j in range(mazey.size):
 			policy = max_of_neighbors(mazey, i, j)
