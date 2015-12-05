@@ -19,6 +19,8 @@ class space(object):
 		return self.policy
 	def formatted_printer(self):
 		return '[{:.4f},{:.4f}]'.format(self.reward, self.expectedUtility)
+	def utility_printer(self):
+		return '{:.4f}'.format(self.expectedUtility)
 	def reward_printer(self):
 		if self.reward > 0:
 			return '+{0:.2f}'.format(self.reward)
@@ -61,7 +63,7 @@ class maze(object):
 		ret_str = ''
 		for i in range(self.size):
 			for j in range(self.size):
-				ret_str += '\t' + self.grid[i][j].formatted_printer()
+				ret_str += '\t' + self.grid[i][j].utility_printer()
 			ret_str += '\n'
 		return ret_str
 
