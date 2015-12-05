@@ -25,7 +25,6 @@ def value_iteration(maze_obj, iterations = 50, terminal = True):
 		if(terminal == True):
 			if maze_obj.grid[i][j].is_terminal():
 				result = maze_obj.grid[cur_y][cur_x].reward
-				print "!!!"
 				return result
 		for action in actions:
 			utilities.append(action_utility(spacey, action))
