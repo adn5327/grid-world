@@ -22,8 +22,14 @@ def value_iteration(maze_obj, iterations = 50, terminal = True):
 		cur_y, cur_x = spacey[0], spacey[1]
 		actions = [(cur_y, cur_x + 1, .8), (cur_y, cur_x - 1, .8), (cur_y + 1, cur_x, .8), (cur_y - 1, cur_x, .8)]
 		utilities = list()
+		if(terminal == True):
+			if maze_obj.grid[i][j].is_terminal():
+				result = maze_obj.grid[cur_y][cur_x].reward
+				print "!!!"
+				return result
 		for action in actions:
 			utilities.append(action_utility(spacey, action))
+
 		result = maze_obj.grid[cur_y][cur_x].reward + (maze_obj.discount * max(utilities))
 		# print result
 		return result

@@ -11,6 +11,6 @@ mazey.setup(listy)
 
 
 print (mazey)
-mazey.value_iteration()
+value_iteration(mazey)
 # mazey = value_iteration(mazey)
 print (mazey)

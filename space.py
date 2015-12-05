@@ -7,12 +7,26 @@ class space(object):
 		self.policy = '#'
 
 	def __str__(self):
-		return '[{0:.4f},{1:.4f}]'.format(self.reward, self.expectedUtility)
-		# if self.reward > 0:
-		# 	return '+{0:.2f}'.format(self.reward)
-		# else:
-		# 	return '{0:.2f}'.format(self.reward)
-		# return self.policy
+
+		# return '[{0:.4f},{0:.4f}]'.format(self.reward, self.expectedUtility)
+		# # if self.reward > 0:
+		# # 	return '+{0:.2f}'.format(self.reward)
+		# # else:
+		# # 	return '{0:.2f}'.format(self.reward)
+		return self.policy
+
+	def policy_printer(self):
+		return self.policy
+	def formatted_printer(self):
+		return '[{:.4f},{:.4f}]'.format(self.reward, self.expectedUtility)
+	def reward_printer(self):
+		if self.reward > 0:
+			return '+{0:.2f}'.format(self.reward)
+		else:
+			return '{0:.2f}'.format(self.reward)		
+
+
+
 
 	def is_terminal(self):
 		if(self.reward != 0 and self.reward != -.04):
@@ -47,9 +61,17 @@ class maze(object):
 		ret_str = ''
 		for i in range(self.size):
 			for j in range(self.size):
-				ret_str += '\t' + self.grid[i][j].__str__()
+				ret_str += '\t' + self.grid[i][j].formatted_printer()
 			ret_str += '\n'
 		return ret_str
+
+	def policy_printer(self):
+		ret_str = ''
+		for i in range(self.size):
+			for j in range(self.size):
+				ret_str += '\t' + self.grid[i][j].policy_printer()
+			ret_str += '\n'
+		return ret_str		
 
 	def setup(self, listy):
 
