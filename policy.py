@@ -8,9 +8,11 @@ def main():
 	listy = [(0,1,-1), (1,3,0), (1,4,-1), (2,3,0), (2,5,3), (3,3,0), (5,0,1), (5,1,-1), (5,3,0), (5,4,-1), (5,5,-1)]
 
 	mazey.setup(listy)
-	print mazey
+	# print mazey
 
 	policy(mazey, True)
+	print mazey.policy_printer()
+
 
 
 
@@ -32,21 +34,21 @@ def policy(mazey, terminal = True):
 def max_of_neighbors(mazey, i,j):
 	find_max = list()
 	if i-1 > 0:
-		left = mazey.grid[i-1][j].expectedUtility
-		find_max.append((left, 'L'))
+		value = mazey.grid[i-1][j].expectedUtility
+		find_max.append((value, 'U'))
 
-	if i+1 <6:
-		right = mazey.grid[i+1][j].expectedUtility
-		find_max.append((right,'R'))
+	if i+1 <mazey.size:
+		value = mazey.grid[i+1][j].expectedUtility
+		find_max.append((value,'D'))
 	if j-1 >0:
-		up = mazey.grid[i][j-1].expectedUtility
-		find_max.append((up, 'U'))
-	if j+1 <6:
-		down = mazey.grid[i][j+1].expectedUtility
-		find_max.append((down,'D'))
+		value = mazey.grid[i][j-1].expectedUtility
+		find_max.append((value, 'L'))
+	if j+1 <mazey.size:
+		value = mazey.grid[i][j+1].expectedUtility
+		find_max.append((value,'R'))
 
 
-	return max(find_max,key=itemgetter(1))[1]
+	return max(find_max,key=itemgetter(0))[1]
 
 
 if __name__ == '__main__':
