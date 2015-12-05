@@ -4,19 +4,26 @@ class space(object):
 		self.reward = reward1
 		self.expectedUtility = 0
 		self.nextUtility = 0
+		self.policy = '#'
 
 	def __str__(self):
 		# return '[{0:.4f},{0:.4f}]'.format(self.reward, self.expectedUtility)
-		if self.reward > 0:
-			return '+{0:.2f}'.format(self.reward)
-		else:
-			return '{0:.2f}'.format(self.reward)
+		# if self.reward > 0:
+		# 	return '+{0:.2f}'.format(self.reward)
+		# else:
+		# 	return '{0:.2f}'.format(self.reward)
+		return self.policy
 
 	def is_terminal(self):
 		if(self.reward != 0 and self.reward != -.04):
 			return True
 		else:
 			return False
+
+	def is_wall(self):
+		if self.reward == 0:
+			return True
+		return False
 
 class maze(object):
 
