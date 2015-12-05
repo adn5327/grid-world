@@ -7,7 +7,7 @@ class space(object):
 		self.policy = '#'
 
 	def __str__(self):
-		return '[{0:.4f},{0:.4f}]'.format(self.reward, self.expectedUtility)
+		return '[{0:.4f},{1:.4f}]'.format(self.reward, self.expectedUtility)
 		# if self.reward > 0:
 		# 	return '+{0:.2f}'.format(self.reward)
 		# else:
