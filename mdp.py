@@ -31,8 +31,9 @@ def value_iteration(maze_obj, iterations = 50, terminal = True):
 	for n in range(iterations):
 		for i in range(maze_obj.size):
 			for j in range(maze_obj.size):
-				maze_obj.grid[i][j].nextUtility = utility((i, j))
+				maze_obj.grid[i][j].change_next_utility(utility((i,j)))
 		maze_obj.update_utilities()
 
+	print (maze_obj)
 	return maze_obj
 		# Change utilities here

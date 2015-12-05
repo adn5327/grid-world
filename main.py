@@ -10,7 +10,7 @@ mazey.setup(listy)
 
 
 
-print mazey
-
-mazey = value_iteration(mazey)
-print mazey
+print (mazey)
+mazey.value_iteration()
+# mazey = value_iteration(mazey)
+print (mazey)
