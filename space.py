@@ -3,6 +3,7 @@ class space(object):
 	def __init__(self, reward1 = -0.04):
 		self.reward = reward1
 		self.expectedUtility = 0
+		self.nextUtility = 0
 
 	def __str__(self):
 		# return '[{0:.4f},{0:.4f}]'.format(self.reward, self.expectedUtility)
@@ -10,6 +11,12 @@ class space(object):
 			return '+{0:.2f}'.format(self.reward)
 		else:
 			return '{0:.2f}'.format(self.reward)
+
+	def is_terminal(self):
+		if(self.reward != 0 and self.reward != -.04):
+			return True
+		else:
+			return False
 
 class maze(object):
 
