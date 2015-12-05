@@ -12,11 +12,7 @@ def value_iteration(maze_obj, iterations = 50, terminal = True):
 			spaces.append((space[0], space[1] - 1, .1))
 		cur_utility = 0
 		for cur_destination in spaces:
-			if ((cur_destination[0] == maze_obj.size) \
-				or (cur_destination[1] == maze_obj.size) \
-				or (cur_destination[0] < 0) \
-				or (cur_destination[1] < 0) \
-				or (maze_obj.grid[cur_destination[0]][cur_destination[1].reward == 0)):
+			if (cur_destination[0] == maze_obj.size) or (cur_destination[1] == maze_obj.size) or (cur_destination[0] < 0) or (cur_destination[1] < 0) or (maze_obj.grid[cur_destination[0]][cur_destination[1]].is_wall()):
 				cur_utility += 0
 			else:
 				cur_utility += (maze_obj.grid[cur_destination[0]][cur_destination[1]].expectedUtility * cur_destination[2])
