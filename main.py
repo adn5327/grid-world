@@ -1,4 +1,5 @@
 from space import *
+from mdp import *
 
 mazey = maze()
 
@@ -9,4 +10,7 @@ mazey.setup(listy)
 
 
 
+print mazey
+
+mazey = value_iteration(mazey)
 print mazey

@@ -24,11 +24,15 @@ def value_iteration(maze_obj, iterations = 50, terminal = True):
 		utilities = list()
 		for action in actions:
 			utilities.append(action_utility(spacey, action))
-		return maze_obj.grid[cur_y][cur_x].reward + (maze_obj.discount * max(utilities))
+		result = maze_obj.grid[cur_y][cur_x].reward + (maze_obj.discount * max(utilities))
+		# print result
+		return result
 
 	for n in range(iterations):
 		for i in range(maze_obj.size):
 			for j in range(maze_obj.size):
-				maze_obj.grid[i][j].nextUtility = utility(i, j)
+				maze_obj.grid[i][j].nextUtility = utility((i, j))
 		maze_obj.update_utilities()
+
+	return maze_obj
 		# Change utilities here
