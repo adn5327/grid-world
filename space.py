@@ -20,7 +20,7 @@ class space(object):
 
 class maze(object):
 
-	def __init__(self, n = 6):
+	def __init__(self, n = 6, discount = .99):
 		self.grid = list()
 		for i in range(n):
 			self.grid.append(list())
@@ -28,6 +28,7 @@ class maze(object):
 				self.grid[i].append(space())
 
 		self.size = n
+		self.discount = discount
 
 	def __str__(self):
 		ret_str = ''
@@ -42,6 +43,11 @@ class maze(object):
 		for entry in listy:
 			self.grid[entry[0]][entry[1]].reward = entry[2]
 
+	def update_utilities(self):
+		for i in range(self.size):
+			for j in range(self.size):
+				self.grid[i][j].expectedUtility = self.grid[i][j].nextUtility
+				self.grid[i][j].nextUtility = 0
 
 
 
