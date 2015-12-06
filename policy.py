@@ -12,13 +12,14 @@ def main():
 
 	policy(mazey, True)
 	print mazey.policy_printer()
+	print mazey
 
 
 
 
 def policy(mazey, terminal = True):
 	#call value iteration here
-	value_iteration(mazey)
+	value_iteration(mazey, terminal)
 	for i in range(mazey.size):
 		for j in range(mazey.size):
 			policy = max_of_neighbors(mazey, i, j)

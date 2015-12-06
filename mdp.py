@@ -1,6 +1,6 @@
 from space import *
 
-def value_iteration(maze_obj, iterations = 50, terminal = True):
+def value_iteration(maze_obj, terminal = True, iterations = 50):
 	def action_utility(space, destination):
 		spaces = list()
 		spaces.append(destination)
