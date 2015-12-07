@@ -18,7 +18,7 @@ class Grid():
 		self.n_s_a = dict()
 		self.trial = list()
 		self.rmse = list()
-		self.maxtrial = 1000
+		self.maxtrial = 2500
 		self.convergence_number = 50
 		self.num_it = 50
 
