@@ -20,6 +20,7 @@ class Grid():
 		self.rmse = list()
 		self.maxtrial = 1000
 		self.convergence_number = 50
+		self.num_it = 50
 
 		self.Ne = 20
 
@@ -140,7 +141,7 @@ class Grid():
 
 	def value_iteration(self, terminal = True):
 		self.num_iterations.append(0)
-		for i in range(1,self.convergence_number+1):
+		for i in range(1,self.num_it+1):
 			self.num_iterations.append(i)
 			for state in self.states:
 				new_util = self.rewards[state] + (self.gamma * self.expect_utility(state, terminal))
@@ -184,14 +185,12 @@ class Grid():
 		print ret_str
 
 
-
-
-if __name__ == '__main__':
+def run_all(terminal, plots = False):
 	maze = Grid()
 	maze.setup_grid()
-	terminal = True
 	maze.value_iteration(terminal)
 	print "utilities"
+	print 
 	arr = np.zeros((6,6), dtype=np.double)
 
 	ret_str = ''
@@ -200,54 +199,63 @@ if __name__ == '__main__':
 			state = (j,i)
 			
 			if state in maze.utility.keys():
-				ret_str += '{0:.4f}'.format(maze.utility[state][-1])
+				ret_str += '{0:.8f}'.format(maze.utility[state][-1])
 				arr[i][j] = maze.utility[state][-1]
 			else:
-				ret_str += '0.0000'
+				ret_str += '0.00000000'
 				arr[i][j] = 0
 			ret_str+='\t'
 		ret_str+='\n'
 	print ret_str
 
 	print
-	print
-	print
+
 
 	print "policy"
+	print
 	maze.print_policy(arr, terminal)
 
-	fp = FontProperties()
-	fp.set_size('xx-small')
-	plt.plot()
-	for i in range(6):
-		for j in range(6):
-			state = (i,j)
-			if state in maze.utility.keys():
-				plt.plot(maze.num_iterations, maze.utility[state], label=str(state))
-	plt.xlabel('Num iterations')
-	plt.ylabel('Utility estimate')
-	plt.legend(prop=fp, loc='best')
-	plt.show()
+	if plots:
+		fp = FontProperties()
+		fp.set_size('xx-small')
+		plt.plot()
+		for i in range(6):
+			for j in range(6):
+				state = (i,j)
+				if state in maze.utility.keys():
+					plt.plot(maze.num_iterations, maze.utility[state], label=str(state))
+		plt.xlabel('Num iterations')
+		plt.ylabel('Utility estimate')
+		plt.legend(prop=fp, loc='best')
+		plt.show()
 
-	maze.reinforcement_learning()
+	if terminal and plots:
+		maze.reinforcement_learning()
+
+		plt.plot()
+		for i in range(6):
+			for j in range(6):
+				state = (i,j)
+				if state in maze.utility.keys():
+					plt.plot(maze.trial, maze.expectedUtil[state], label=str(state))
+		plt.xlabel('Num trials')
+		plt.ylabel('Utility estimate')
+		plt.legend(prop=fp, loc='best')
+		plt.show()
+
+		plt.plot(maze.trial, maze.rmse, label = 'RMSE')
+		plt.xlabel('Num trials')
+		plt.ylabel('RMSE')
+		plt.legend(loc='best')
+		plt.show()
 
 
+if __name__ == '__main__':
+	# print 'NON TERMINAL\n'
+	# run_all(False, True)
+	print 'TERMINAL\n'
+	run_all(True, True)
 
-	plt.plot()
-	for i in range(6):
-		for j in range(6):
-			state = (i,j)
-			if state in maze.utility.keys():
-				plt.plot(maze.trial, maze.expectedUtil[state], label=str(state))
-	plt.xlabel('Num trials')
-	plt.ylabel('Utility estimate')
-	plt.legend(prop=fp, loc='best')
-	plt.show()
 
-	plt.plot(maze.trial, maze.rmse, label = 'RMSE')
-	plt.xlabel('Num trials')
-	plt.ylabel('RMSE')
-	plt.legend(loc='best')
-	plt.show()
 
 
